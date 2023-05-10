@@ -32,8 +32,6 @@ class ProductValidateSerializer(serializers.Serializer):
     category_id = serializers.IntegerField(min_value=1)
     tags = serializers.ListField(child=serializers.IntegerField())
 
-    # missing_tags = serializers.SerializerMethodField(read_only=True)
-
     def validate_category_id(self, category_id):
         try:
             Category.objects.get(id=category_id)
@@ -82,9 +80,3 @@ class ReviewValidateSerializer(serializers.Serializer):
             raise ValidationError('Review does not exist')
         return product_id
 
-# {
-#     "title": "ffuuucck",
-#     "price": 3,
-#     "category_id": 2,
-#     "tags": [1,8,9]
-# }
