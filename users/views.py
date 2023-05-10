@@ -6,7 +6,6 @@ from users.models import Confirm_User
 from users.serializers import UserCreateSerializer, UserAuthoSerializer, ConfirmUserSerializer
 from django.contrib.auth import authenticate
 from rest_framework.authtoken.models import Token
-# from django.core.mail import EmailMessage
 from django.utils.http import urlsafe_base64_decode
 from django.utils.encoding import force_str
 from allauth.account.models import EmailConfirmationHMAC
@@ -21,18 +20,6 @@ class RegistrationAPIView(APIView):
         user = User.objects.create_user(**serializer.validated_data)
         user.is_active = False
         return Response(data={'user_id': user.id}, status=status.HTTP_201_CREATED)
-
-
-# @api_view(['GET'])
-# @permission_classes([AllowAny])
-# def confirm_user(request, uidb64, token):
-#     try:
-#         uid = force_str(urlsafe_base64_decode(uidb64))
-#         confirmation = EmailConfirmationHMAC.from_key(uid=uid, key=token)
-#         confirmation.confirm(request)
-#         return Response({'message': 'Email confirmed successfully'})
-#     except Exception as e:
-#         return Response({'message': str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class ConfirmUserAPIView(APIView):
