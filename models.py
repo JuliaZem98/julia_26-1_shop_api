@@ -32,8 +32,3 @@ class Review(models.Model):
     def __str__(self):
         return self.text
 
-    # def product_reviews(self):
-    #     if self.product:
-    #         return self.text , self.stars
-    #     else:
-    #         return f"No reviews here"
